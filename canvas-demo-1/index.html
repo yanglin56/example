@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画点</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="canvas" width="100" height="100"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+
+        // let documentWidth = document.body.clientWidth
+        // let documentHeight = document.body.clientHeight
+        // canvas.width = documentWidth
+        // canvas.height = documentHeight
+        canvas.width = document.documentElement.clientWidth
+        canvas.height = document.documentElement.clientHeight
+
+        // 画线
+
+
+        let ctx = canvas.getContext("2d");
+        ctx.fillStyle = "black";
+        ctx.strokeStyle = 'none'
+
+        let painting = false
+
+        var isTouchDevice = 'ontouchstart' in
+            document.documentElement;
+
+        if (isTouchDevice) {
+            canvas.ontouchmove = (e) => {
+                let x = e.touches[0].clientX
+                let y = e.touches[0].clientY
+                ctx.beginPath();
+                ctx.arc(x, y, 10, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fill();
+            }
+        } else {
+            canvas.onmousedown = () => {
+                painting = true
+            }
+
+            // 获取屏幕所见宽度
+            // console.log(document.body.clientWidth)
+
+            canvas.onmousemove = (e) => {
+                    if (painting === true) {
+                        // 矩形 ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10);
+                        ctx.beginPath();
+                        ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
+                        ctx.stroke();
+                        ctx.fill()
+                    }
+                }
+                // 浏览器会调用 canvas.onmousemove(事件相关信息)，把事件包装成e，名字不重要，也可以设置为其他，比如x
+            canvas.onmouseup = () => {
+                painting = false
+            }
+        }
+    </script>
+    <!-- <div id="canvas"></div> -->
+    <!-- <script>
+        做出来比较卡顿，效果不好，用canvas会比较好
+        canvas.onmousemove = (e) => {
+            console.log(e.clientX)
+            console.log(e.clientY)
+                // console.log调试大法
+            let div = document.createElement('div')
+            div.style.position = 'absolute'
+            div.style.left = e.clientX + 'px'
+            div.style.top = e.clientY + 'px'
+                // div.style.border = '1px solid red'
+            div.style.width = '6px'
+            div.style.height = '6px'
+            div.style.marginLeft = '-3px'
+            div.style.marginTop = '-3px'
+            div.style.borderRadius = '50%'
+            div.style.backgroundColor = 'black'
+            canvas.appendChild(div)
+        }
+    </script> -->
+</body>
+
+</html>

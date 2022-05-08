@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#canvas {
+    /* height: 100vh;
+    width: 100vw; */
+    /* 设置好宽高之后，如果强行设置宽高，会变得模糊，不会自适应 */
+    /* border: 1px solid red; */
+    display: block;
+}
+
+body {
+    overflow: hidden;
+}
