@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // console.log(test.href);
+        // console.log(test.getAttribute('href'));
+        console.log(test.onclick)
+            // test.onclick = () => {
+            //     console.log('hi');
+            // }
+            // test.onclick = function(x) {
+            //         console.log(this)
+            //         console.log(x)
+            //     }
+            //test.onclick.call(test,event)浏览器用call传进来的x
+        test.innerText = 'hi'
+        test.textContent = 'ho'
+            //两种方法都可以
+        test.innerHTML = `
+         <p>
+           <strong>hi</strong>
+         </p>
+         `
+            //''报错了，``倒是可以
+    </script>
+</head>
+
+<body>
+    <!-- <a id="test" href="/xxx">/xxx</a> -->
+    <div id="test">test</div>
+</body>
+
+</html>
