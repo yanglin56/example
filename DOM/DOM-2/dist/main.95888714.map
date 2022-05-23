@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.js"],"names":["x","jQuery","children","print"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,IAAMA,IAAIC,OAAO,OAAP,CAAV;;AAEAD,EAAEE,QAAF,GAAaC,KAAb","file":"main.95888714.map","sourceRoot":"../src","sourcesContent":["const x = jQuery('.test')\n\nx.children().print()"]}
