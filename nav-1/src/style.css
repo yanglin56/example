@@ -163,8 +163,19 @@ body {
     position: absolute;
     right: 10px;
     top: 5px;
+    width: 18px;
+    height: 18px;
     display: none;
     cursor: default;
+    color: #81868a;
+    text-align: center;
+    line-height: 18px;
+}
+
+.siteList .site>.close:hover {
+    background: #d3d3d5;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .siteList .site:hover,
@@ -194,7 +205,7 @@ body {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #f1f3f4;
+    background: #f1f3f4;
 }
 
 .siteList .addButton .text {
