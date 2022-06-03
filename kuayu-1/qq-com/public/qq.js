@@ -1,5 +1,5 @@
 const request = new XMLHttpRequest()
-request.open('GET', 'https://qq.com:8888/friends.json')
+request.open('GET', '/friends.json')
 request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
         console.log(request.response)
