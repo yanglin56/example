@@ -21,21 +21,15 @@ var server = http.createServer(function(request, response) {
 
     console.log('有个傻子发请求过来啦！路径（带查询参数）为：' + pathWithQuery)
 
-    if (path === '/index.html') {
+    if (path === '/') {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
-        response.write(fs.readFileSync('./public/index.html'))
+        response.write(`qq.com`)
         response.end()
-    } else if (path === '/qq.js') {
+    } else if (path === '/x') {
         response.statusCode = 200
-        response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
-        response.write(fs.readFileSync('./public/qq.js'))
-        response.end()
-    } else if (path === '/friends.json') {
-        response.statusCode = 200
-        response.setHeader('Content-Type', 'text/json;charset=utf-8')
-        response.setHeader('Access-Control-Allow-Origin', 'http://frank.com:9990')
-        response.write(fs.readFileSync('./public/friends.json'))
+        response.setHeader('Content-Type', 'text/css;charset=utf-8')
+        response.write(`body{color: red;}`)
         response.end()
     } else {
         response.statusCode = 404
