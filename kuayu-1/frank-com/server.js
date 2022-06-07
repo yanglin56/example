@@ -21,15 +21,15 @@ var server = http.createServer(function(request, response) {
 
     console.log('有个傻子发请求过来啦！路径（带查询参数）为：' + pathWithQuery)
 
-    if (path === '/') {
+    if (path === '/index.html') {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/html;charset=utf-8')
-        response.write(`frank.com`)
+        response.write(fs.readFileSync('./public/index.html'))
         response.end()
-    } else if (path === '/x') {
+    } else if (path === '/frank.js') {
         response.statusCode = 200
-        response.setHeader('Content-Type', 'text/css;charset=utf-8')
-        response.write(`body{color: red;}`)
+        response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+        response.write(fs.readFileSync('./public/frank.js'))
         response.end()
     } else {
         response.statusCode = 404
