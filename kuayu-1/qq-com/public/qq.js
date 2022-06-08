@@ -5,4 +5,5 @@ request.onreadystatechange = () => {
         console.log(request.response)
     }
 }
+
 request.send()
