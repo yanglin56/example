@@ -1,4 +1,4 @@
-const fs = request("fs");
+const fs = require("fs");
 
 //读数据库
 const usersString = fs.readFileSync("./db/users.json").toString();
