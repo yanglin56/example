@@ -1,12 +1,20 @@
 import './app1.css';
-import $ from 'jquery';
+import $, { data } from 'jquery';
 
-//把数据相关的都放到m
+const eventBus = $(window)
+    //把数据相关的都放到m
 const m = {
         //初始化数据
         data: {
             n: parseInt(localStorage.getItem('n'))
-        }
+        },
+        create() {},
+        delete() {},
+        update(data) {
+            Object.assign(m.data, data)
+            eventBus.trigger('m:updated')
+        },
+        get() {}
     }
     //把所有跟视图相关的都放到v
 const v = {
@@ -39,7 +47,11 @@ const c = {
         init(container) {
             v.init(container)
             v.render(m.data.n) //view=render(data)
-            c.bindEvents()
+            c.autoBindEvents()
+            eventBus.on('m:updated', () => {
+                console.log('你好')
+                v.render(m.data.n)
+            })
         },
         events: {
             'click #add1': 'add',
@@ -48,16 +60,16 @@ const c = {
             'click #divide2': 'div'
         },
         add() {
-            m.data.n += 1
+            m.update({ n: m.data.n + 1 })
         },
         minus() {
-            m.data.n -= 1
+            m.update({ n: m.data.n - 1 })
         },
         mul() {
-            m.data.n *= 2
+            m.update({ n: m.data.n * 2 })
         },
         div() {
-            m.data.n /= 2
+            m.update({ n: m.data.n / 2 })
         },
         autoBindEvents() {
             for (let key in c.events) {
@@ -70,5 +82,4 @@ const c = {
         }
     }
     //第一i次渲染
-
 export default c

@@ -11267,14 +11267,23 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var eventBus = (0, _jquery2.default)(window);
 //把数据相关的都放到m
 var m = {
     //初始化数据
     data: {
         n: parseInt(localStorage.getItem('n'))
-    }
-    //把所有跟视图相关的都放到v
-};var v = {
+    },
+    create: function create() {},
+    delete: function _delete() {},
+    update: function update(data) {
+        Object.assign(m.data, data);
+        eventBus.trigger('m:updated');
+    },
+    get: function get() {}
+};
+//把所有跟视图相关的都放到v
+var v = {
     el: null,
     html: '\n        <div>\n            <div class="output">\n                <span id="number">{{n}}</span>\n            </div>\n            <div class="actions">\n                <button id="add1">\u27951</button>\n                <button id="minus1">\u27961</button>\n                <button id="mul2">\u2716\uFE0F2</button>\n                <button id="divide2">\u27972</button>\n            </div>\n        </div>\n',
     init: function init(container) {
@@ -11291,7 +11300,11 @@ var c = {
     init: function init(container) {
         v.init(container);
         v.render(m.data.n); //view=render(data)
-        c.bindEvents();
+        c.autoBindEvents();
+        eventBus.on('m:updated', function () {
+            console.log('你好');
+            v.render(m.data.n);
+        });
     },
 
     events: {
@@ -11301,16 +11314,16 @@ var c = {
         'click #divide2': 'div'
     },
     add: function add() {
-        m.data.n += 1;
+        m.update({ n: m.data.n + 1 });
     },
     minus: function minus() {
-        m.data.n -= 1;
+        m.update({ n: m.data.n - 1 });
     },
     mul: function mul() {
-        m.data.n *= 2;
+        m.update({ n: m.data.n * 2 });
     },
     div: function div() {
-        m.data.n /= 2;
+        m.update({ n: m.data.n / 2 });
     },
     autoBindEvents: function autoBindEvents() {
         for (var key in c.events) {
@@ -11323,7 +11336,6 @@ var c = {
     }
 };
 //第一i次渲染
-
 exports.default = c;
 },{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.css":[function(require,module,exports) {
 
@@ -11469,7 +11481,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55654' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55803' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
