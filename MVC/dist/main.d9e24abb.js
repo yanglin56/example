@@ -11268,9 +11268,8 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery2.default)(window);
-//把数据相关的都放到m
+// 数据相关都放到m
 var m = {
-    //初始化数据
     data: {
         n: parseInt(localStorage.getItem('n'))
     },
@@ -11279,30 +11278,30 @@ var m = {
     update: function update(data) {
         Object.assign(m.data, data);
         eventBus.trigger('m:updated');
+        localStorage.setItem('n', m.data.n);
     },
     get: function get() {}
 };
-//把所有跟视图相关的都放到v
+// 视图相关都放到v
 var v = {
     el: null,
-    html: '\n        <div>\n            <div class="output">\n                <span id="number">{{n}}</span>\n            </div>\n            <div class="actions">\n                <button id="add1">\u27951</button>\n                <button id="minus1">\u27961</button>\n                <button id="mul2">\u2716\uFE0F2</button>\n                <button id="divide2">\u27972</button>\n            </div>\n        </div>\n',
+    html: '\n  <div>\n    <div class="output">\n      <span id="number">{{n}}</span>\n    </div>\n    <div class="actions">\n      <button id="add1">+1</button>\n      <button id="minus1">-1</button>\n      <button id="mul2">*2</button>\n      <button id="divide2">\xF72</button>\n    </div>\n  </div>\n',
     init: function init(container) {
         v.el = (0, _jquery2.default)(container);
     },
-    render: function render() {
+    render: function render(n) {
         if (v.el.children.length !== 0) v.el.empty();
-        (0, _jquery2.default)(v.html.replace('{{n}}', m.data.n)).appendTo((0, _jquery2.default)(v.el));
+        (0, _jquery2.default)(v.html.replace('{{n}}', n)).appendTo(v.el);
     }
 };
-//其他c
+// 其他都c
 var c = {
-    //寻找重要的元素
     init: function init(container) {
         v.init(container);
-        v.render(m.data.n); //view=render(data)
+        v.render(m.data.n); // view = render(data)
         c.autoBindEvents();
         eventBus.on('m:updated', function () {
-            console.log('你好');
+            console.log('here');
             v.render(m.data.n);
         });
     },
@@ -11328,14 +11327,14 @@ var c = {
     autoBindEvents: function autoBindEvents() {
         for (var key in c.events) {
             var value = c[c.events[key]];
-            var spaceIndex = key.indexOf('');
+            var spaceIndex = key.indexOf(' ');
             var part1 = key.slice(0, spaceIndex);
             var part2 = key.slice(spaceIndex + 1);
             v.el.on(part1, part2, value);
         }
     }
 };
-//第一i次渲染
+
 exports.default = c;
 },{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.css":[function(require,module,exports) {
 
@@ -11345,6 +11344,10 @@ module.hot.accept(reloadCSS);
 },{"_css_loader":"../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app2.js":[function(require,module,exports) {
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 require('./app2.css');
 
 var _jquery = require('jquery');
@@ -11353,23 +11356,66 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var html = '\n<section id="app2">\n            <ol class="tab-bar">\n                <li><span>\u540D\u5B57</span></li>\n                <li><span>\u73ED\u7EA7</span></li>\n            </ol>\n            <ol class="tab-content">\n                <li>\u5468\u5468</li>\n                <li>\u5C0F\u5C0F</li>\n            </ol>\n        </section>\n';
-var $element = (0, _jquery2.default)(html).appendTo((0, _jquery2.default)('body>.page'));
+var eventBus = (0, _jquery2.default)(window);
 
-var $tabBar = (0, _jquery2.default)('#app2 .tab-bar');
-var $tabContent = (0, _jquery2.default)('#app2 .tab-content');
 var localKey = 'app2.index';
-var index = localStorage.getItem(localKey) || 0;
+var m = {
+    data: {
+        index: parseInt(localStorage.getItem(localKey)) || 0
+    },
+    create: function create() {},
+    delete: function _delete() {},
+    update: function update(data) {
+        Object.assign(m.data, data);
+        eventBus.trigger('m:updated');
+        localStorage.setItem('index', m.data.index);
+    },
+    get: function get() {}
+};
 
-$tabBar.on('click', 'li', function (e) {
-    var $li = (0, _jquery2.default)(e.currentTarget);
-    $li.addClass("selected").siblings().removeClass("selected");
-    var index = $li.index();
-    localStorage.setItem(localKey, index);
-    $tabContent.children().eq(index).addClass('active').siblings().removeClass('active');
-});
+var v = {
+    el: null,
+    html: function html(index) {
+        return '\n    <div>\n      <ol class="tab-bar">\n        <li class="' + (index === 0 ? 'selected' : '') + '" data-index="0"><span>1111</span></li>\n        <li class="' + (index === 1 ? 'selected' : '') + '" data-index="1"><span>2222</span></li>\n      </ol>\n      <ol class="tab-content">\n        <li class="' + (index === 0 ? 'active' : '') + '">\u5185\u5BB91</li>\n        <li class="' + (index === 1 ? 'active' : '') + '">\u5185\u5BB92</li>\n      </ol>\n    </div>\n';
+    },
+    init: function init(container) {
+        v.el = (0, _jquery2.default)(container);
+    },
+    render: function render(index) {
+        if (v.el.children.length !== 0) v.el.empty();
+        (0, _jquery2.default)(v.html(index)).appendTo(v.el);
+    }
+};
 
-$tabBar.children().eq(index).trigger('click');
+var c = {
+    init: function init(container) {
+        v.init(container);
+        v.render(m.data.index); // view = render(data)
+        c.autoBindEvents();
+        eventBus.on('m:updated', function () {
+            v.render(m.data.index);
+        });
+    },
+
+    events: {
+        'click .tab-bar li': 'x'
+    },
+    x: function x(e) {
+        var index = parseInt(e.currentTarget.dataset.index);
+        m.update({ index: index });
+    },
+    autoBindEvents: function autoBindEvents() {
+        for (var key in c.events) {
+            var value = c[c.events[key]];
+            var spaceIndex = key.indexOf(' ');
+            var part1 = key.slice(0, spaceIndex);
+            var part2 = key.slice(spaceIndex + 1);
+            v.el.on(part1, part2, value);
+        }
+    }
+};
+
+exports.default = c;
 },{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app3.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
@@ -11441,18 +11487,19 @@ var _app = require('./app1.js');
 
 var _app2 = _interopRequireDefault(_app);
 
-require('./app2.js');
+var _app3 = require('./app2.js');
+
+var _app4 = _interopRequireDefault(_app3);
 
 require('./app3.js');
 
 require('./app4.js');
 
-var _jquery = require('jquery');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _app2.default.init('#app1');
-},{"./reset.css":"reset.css","./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js","jquery":"../node_modules/jquery/dist/jquery.js"}],"../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_app4.default.init('#app2');
+},{"./reset.css":"reset.css","./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js"}],"../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
