@@ -1,21 +1,22 @@
 import './app1.css'
 import $ from 'jquery'
+import Model from '../base/Model.js'
+import Vue from 'vue'
+console.log(Vue)
 
 const eventBus = $(window)
     // 数据相关都放到m
 const m = {
-        data: {
-            n: parseInt(localStorage.getItem('n'))
-        },
-        create() {},
-        delete() {},
-        update(data) {
-            Object.assign(m.data, data)
-            eventBus.trigger('m:updated')
-            localStorage.setItem('n', m.data.n)
-        },
-        get() {}
-    }
+    data: {
+        n: parseInt(localStorage.getItem('n'))
+    },
+    update(data) {
+        Object.assign(m.data, data)
+        eventBus.trigger('m:updated')
+        localStorage.setItem('n', m.data.n)
+    },
+}
+const m2 = new Model()
     // 视图相关都放到v
 const v = {
         el: null,
