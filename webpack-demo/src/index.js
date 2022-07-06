@@ -9,6 +9,13 @@ div.innerHTML = `
 const button = document.createElement('button')
 button.innerHTML = '懒加载'
 button.onclick = () => {
-    const lazy =
-        import ('./lazy.js')
+    const promise =
+        import ('./lazy')
+    promise.then((module) => {
+        const fn = module.default
+        fn()
+    }, () => {
+        console.log('模块加载错误')
+    })
 }
+div.appendChild(button)
