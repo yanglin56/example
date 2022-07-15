@@ -1,0 +1,33 @@
+<style>
+    p {
+        counter-increment: par-num;
+    }
+    
+    h1 {
+        counter-reset: par-num;
+        counter-increment: h1-num;
+    }
+    
+    p::before {
+        content: counter(par-num, upper-roman)"."
+    }
+    
+    h::before {
+        content: counter(h1-num, upper-roman)"."
+    }
+</style>
+<h1>Text</h1>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<h1>Text</h1>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
+<p>Text</p>
