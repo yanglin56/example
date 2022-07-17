@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-size: 50px;
+        }
+    </style>
+    <script>
+        function isInteger(obj) {
+            return obj % 1 === 0
+        }
+        let price = 56;
+        let count;
+        count = prompt(price + "元一杯，您需要多少杯");
+        if (isNaN(count)) {
+            document.write("请输入需要的杯数（数字）");
+        } else {
+            if (isInteger(count)) {
+                if (count % 2 === 0) {
+                    totalPrice = count * price * 0.75;
+                } else {
+                    totalPrice = count * price * 0.75 + price / 4;
+                }
+                document.write("您总共消费了" + totalPrice + "元");
+            } else {
+                document.write("请输入整数");
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
