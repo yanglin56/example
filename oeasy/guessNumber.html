@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字</title>
+    <style>
+        body {
+            font-size: 6px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script>
+        let a = Math.random();
+        let binggo = false;
+
+        function guess() {
+            if (binggo) {
+                return;
+            }
+            let guess = prompt("您猜色子是多少?");
+            if (guess === a) {
+                document.write("您猜中了！！！");
+                document.write("<img src=\"images/" + a + ".png\" />");
+                binggo = true;
+            } else if (guess > a) {
+                document.getElementById("demo").innerHTML = "您猜大了！";
+
+            } else {
+                document.getElementById("demo").innerHTML = "您猜小了！";
+            }
+        }
+
+        a = Math.floor(a * 6) + 1;
+        console.info(a);
+        // document.write(a);
+        document.write("<img src=\"images/" + a + ".png\" />");
+        guess();
+    </script>
+</body>
+
+</html>
