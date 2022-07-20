@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="go()">
+
+</body>
+<script>
+    function go() {
+
+        let r = 3 * Math.random();
+        if (r < 1) {
+            document.body.innerHTML = "<img src='images/rock.png'>";
+        } else if (r < 2) {
+            document.body.innerHTML = "<img src='images/scissors.png'>";
+        } else {
+            document.body.innerHTML = "<img src='images/paper.png'>";
+        }
+    }
+</script>
+
+</html>
