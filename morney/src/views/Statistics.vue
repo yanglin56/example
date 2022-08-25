@@ -1,16 +1,16 @@
 <template>
   <div>
     Statistics.vue
+    <Nav />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Statistics from '@/views/Statistics.vue';
 
 export default Vue.extend({
-  name:'Statistics'
-})
+  name:'Statistics',
+});
 </script>
 
 <style lang="scss" scoped>
