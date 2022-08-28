@@ -22,6 +22,7 @@ export default class Types extends Vue{
     }
       this.type = type;
     }
+    
 }
 </script>
 
