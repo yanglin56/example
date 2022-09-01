@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "noEmitOnError": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -8,7 +7,6 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
@@ -27,9 +25,7 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ],
-    "allowJs": true,
-    "noImplicitThis": true
+    ]
   },
   "include": [
     "src/**/*.ts",
