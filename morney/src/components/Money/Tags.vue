@@ -1,7 +1,7 @@
 <template>
      <div class="tags">
         <div class="new">
-          <button @click="create">新增标签</button>
+          <button @click="create">添加标签</button>
         </div>
         <ul class="current">
           <li v-for="tag in dataSource" :key="tag.id"
