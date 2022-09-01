@@ -29,6 +29,7 @@
       "scripthost"
     ],
     "allowJs": true,
+    "noImplicitThis": true
   },
   "include": [
     "src/**/*.ts",
