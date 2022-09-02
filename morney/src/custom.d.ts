@@ -1,3 +1,4 @@
+import recordListModel from '@/models/recordListModel';
 type RecordItem = {
   tags: string[]
   notes: string
@@ -24,5 +25,7 @@ interface Window {
   createTag: (name: string) => void;
   findTag: (id:string) => Tag | undefined;
   removeTag: (id: string) => boolean;
-  updateTag: TagListModel['update']
+  updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
+  recordList: RecordItem[];
+  createRecord: (record: RecordItem) => void;
 }
