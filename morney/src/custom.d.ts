@@ -1,4 +1,3 @@
-import recordListModel from '@/models/recordListModel';
 type RecordItem = {
   tags: string[]
   notes: string

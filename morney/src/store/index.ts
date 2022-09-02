@@ -1,42 +1,30 @@
+import clone from '@/lib/clone';
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Money from '@/views/Money.vue';
-import Labels from '@/views/Labels.vue';
-import Statistics from '@/views/Statistics.vue';
-import NotFound from '@/views/NotFound.vue';
-import EditLabel from '@/views/EditLabel.vue';
+import Vuex from 'vuex';
 
-Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: '/',
-    redirect: '/money'
+Vue.use(Vuex); // 把store 绑到 Vue.prototype.$store = store
+
+const store = new Vuex.Store({
+  state: { //data
+    recordList: [] as RecordItem[]
   },
-  {
-    path: '/money',
-    component: Money
-  },
-  {
-    path: '/labels',
-    component: Labels
-  },
-  {
-    path: '/statistics',
-    component: Statistics
-  },
-  {
-    path: '/labels/edit/:id',
-    component: EditLabel
-  },
-  {
-    path: '*',
-    component: NotFound
+  mutations: { //methods
+    fetchRecords(state) {
+      state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
+    },
+    createRecord(state,record) {
+      const record2: RecordItem = clone(record);
+      record2.createdAt = new Date();
+      state.recordList.push(record2);
+      store.commit('saveRecords')
+      // recordStore.saveRecords();
+    },
+    saveRecords(state) {
+      window.localStorage.setItem('recordList',
+       JSON.stringify(state.recordList));
+    },
   }
-];
-
-const router = new VueRouter({
-  routes
 });
 
-export default router;
+export default store;
