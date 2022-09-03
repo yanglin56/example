@@ -26,20 +26,11 @@
 
   @Component({  
     components: {Button},
-    computed: {
-      tags() {
-        return this.$store.state.tagList;
-      }
-    }
   })
-  // export default class Labels extends Vue {
-  //   [x: string]: any;  //tags报错系统添加的索引
-  //   beforeCreate () {
-  //     this.$store.commit('fetchTags');
-  //   }
-  // }
-  export default class Labels extends mixins(TagHelper){
-    [x: string]: any;  //tags报错系统添加的索引
+  export default class Labels extends mixins(TagHelper) {
+    get tags(){
+      return this.$store.state.tagList;
+    }
     beforeCreate () {
       this.$store.commit('fetchTags');
     }

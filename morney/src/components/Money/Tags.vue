@@ -19,17 +19,14 @@
   import { mixins } from 'vue-class-component';
   import {Component, Prop} from 'vue-property-decorator';
 
-  @Component({
-    computed: {
-      tagList() {
-       return this.$store.state.tagList;
-      }
-    }
-  })
+  @Component
   export default class Tags extends mixins(TagHelper){
-    [x: string]: any;  //tags报错系统添加的索引
     selectedTags: string[] = [];
-
+    
+    get tagList() {
+       return this.$store.state.tagList;
+    }
+   
     created () {
       this.$store.commit('fetchTags');
     }
