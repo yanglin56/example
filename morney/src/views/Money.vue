@@ -31,7 +31,8 @@
     recordTypeList = recordTypeList;
     record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0,
-};
+    id: undefined
+    };
     created() {
       this.$store.commit('fetchRecords');
     }
