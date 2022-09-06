@@ -30,8 +30,9 @@
     }
     recordTypeList = recordTypeList;
     record: RecordItem = {
-      tags: [], notes: '', type: '-', amount: 0
-    };
+    tags: [], notes: '', type: '-', amount: 0,
+    id: undefined
+};
     created() {
       this.$store.commit('fetchRecords');
     }
@@ -45,7 +46,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .layout-content {
+  ::v-deep .layout-content {
     display: flex;
     flex-direction: column-reverse;
   }
